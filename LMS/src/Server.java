@@ -107,6 +107,9 @@ public class Server implements serverInterface {
         int j=statement.executeUpdate(
                 "insert into studentbook(studentname,name,author,serialno,bookcount)"+"values('"+studentname+"','"+name+"','"+author+"','"+serialno+"',"+bookcount+")"
         );
+        statement.executeUpdate(
+                "Update book set bookcount="+(s.getBookCount()-1)+" where name = '"+s.getName()+"'"
+        );
     }
 
     @Override
@@ -142,8 +145,17 @@ public class Server implements serverInterface {
         int j=statement.executeUpdate(
                 "delete from studentbook where name='"+bookName+"' and studentname='"+studentName+"'"
         );
+        Map<String, Books> booksMap =getBooksDb();
+        Books books = booksMap.get(bookName);
+        statement.executeUpdate(
+                "Update book set bookcount="+(books.getBookCount()+1)+" where name = '"+bookName+"'"
+        );
     }
-
+    public void UpdateBook(String bookName,int number12) throws SQLException {
+        statement.executeUpdate(
+                "Update book set bookcount="+number12+" where name = '"+bookName+"'"
+        );
+    }
     public static void main(String[] args) throws SQLException {
         Server s = new Server();
 //        Map<String,Books>map = new HashMap<>();

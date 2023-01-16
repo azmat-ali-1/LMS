@@ -652,31 +652,49 @@ public class frame extends framehelper implements ActionListener, framInterface,
         repository.update();
         repository.returnBook(studentName,bookName);
     }
+    public boolean checkDigit(String s1){
+        for(int i=0;i<s1.length();i++){
+            if(Character.isDigit(s1.charAt(i))){
+                continue;
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
    public void UpdateBook() throws SQLException {
        List<Books> books1 = repository.getAllBooks();
        String str [] = new String[books1.size()];
        for (int i=0;i<books1.size();i++){
            str[i]=books1.get(i).getName();
        }
-       JList jList2 = new JList(str);
+       jList2 = new JList(str);
        jList2.setForeground(Color.WHITE);
        jList2.setBackground(Color.DARK_GRAY);
        jList2.addMouseListener(this);
        JScrollPane jScrollPane6 = new JScrollPane(jList2);
        jScrollPane6.setPreferredSize(new Dimension(180,430));
-        JLabel jLabel = new JLabel("Current Name of Book");
-        JLabel jLabel1 = new JLabel("Update Number Of book");
-        jLabel.setForeground(Color.WHITE);
-        JTextField jTextField4 = new JTextField(10);
-       JTextField jTextField5 = new JTextField(10);
-       JButton jButton5 = new JButton("Enter");
-        p2.add(jScrollPane6);p2.add(jLabel);p2.add(jTextField4);p2.add(jLabel1);p2.add(jTextField5);
-        p2.add(jButton5);
-    }
-    public void UpdateBook2(String name) throws SQLException {
-        repository.update();
-        List<Books> books1 = repository.getBookByName(name);
 
+        p2.add(jScrollPane6);
+
+    }
+    public int count;
+    public String name123;
+    public void UpdateBook2() throws SQLException {
+//        JTextField jTextField4 = new JTextField(books1.get(0).getName());
+//        JTextField jTextField5 = new JTextField(books1.get(0).getAuthor());
+//        JTextField jTextField6 = new JTextField(books1.get(0).getSerialNo());
+        System.out.println(count);
+        jTextField7 = new JTextField(10);
+        jTextField7.setText(String.valueOf(count));
+        button = new JButton("+1");
+        button.addActionListener(this);
+        button3 = new JButton("-1");
+        button3.addActionListener(this);
+        button1 = new JButton("Update");
+        button1.addActionListener(this);
+        p2.add(jTextField7);p2.add(button);p2.add(button3);p2.add(button1);
     }
     public void duallistfuntion2(String str,String order){
         if(check(str)==true&&order.equals("add")){
@@ -985,6 +1003,52 @@ public class frame extends framehelper implements ActionListener, framInterface,
                 p2.revalidate();
                 p2.repaint();
             }
+        } else if (e.getSource() == button) {
+            if(count==10){
+                JOptionPane.showMessageDialog(null,"Not Allow");
+                return;
+            }
+            count++;
+            p2.removeAll();
+            try {
+                UpdateBook2();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            p2.revalidate();
+            p2.repaint();
+        }
+        else if (e.getSource()==button3) {
+            if(count>0){
+                count--;
+            }
+          else {
+              JOptionPane.showMessageDialog(null,"Not Allow");
+            }
+          p2.removeAll();
+            try {
+                UpdateBook2();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            p2.revalidate();
+            p2.repaint();
+        } else if (e.getSource() == button1) {
+            String s1 = jTextField7.getText();
+            if(checkDigit(s1)&&Integer.parseInt(s1)<=10&&Integer.parseInt(s1)>0){
+                try {
+                    repository.UpdateBook(name123,Integer.parseInt(s1));
+                    p2.removeAll();
+                    UpdateBook();
+                    p2.revalidate();
+                    p2.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"Please Enter Valid Digits");
+            }
         }
     }
 public int pp=0;
@@ -1041,6 +1105,19 @@ public int pp=0;
             p2.removeAll();
             try {
                 retrunBookfunction(name12);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            p2.revalidate();
+            p2.repaint();
+        } else if (e.getSource() == jList2) {
+            p2.removeAll();
+            try {
+                repository.update();
+                List<Books> books1 = repository.getBookByName((String) jList2.getSelectedValue());
+                count=books1.get(0).getBookCount();
+                name123=(String) jList2.getSelectedValue();
+                UpdateBook2();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }

@@ -233,6 +233,13 @@ public class Repository implements Funtions {
         server.setStudentDb(s);
         return "Successful";
     }
+    public boolean getBookcountboolean(String bookname){
+        Books books = bookdb.get(bookname);
+        if(books.getBookCount()==0){
+            return false;
+        }
+        return true;
+    }
     //set
     @Override
     public String issueBookToStudent(String student, String book) throws SQLException {
@@ -240,7 +247,7 @@ public class Repository implements Funtions {
         studentdb = (HashMap<String, Student>) server.getStudentDb();
         bookdb = (HashMap<String, Books>) server.getBooksDb();
         if(studentdb.containsKey(student)){
-            if(bookdb.containsKey(book)){
+            if(bookdb.containsKey(book)&&getBookcountboolean(book)){
                 if(!studentbookdb.containsKey(student)){
                     List<Books> b = new ArrayList<>();
                     b.add(bookdb.get(book));
@@ -257,6 +264,7 @@ public class Repository implements Funtions {
                     s.setNumberOfBookIssue(b.size());
                 }
                 server.setStudentBookDb(student,bookdb.get(book));
+
                 return book+" Book Successfully issue to "+student;
             }
             return "Book not present "+book;
@@ -287,5 +295,8 @@ public class Repository implements Funtions {
         studentdb= (HashMap<String, Student>) server.getStudentDb();
         bookdb= (HashMap<String, Books>) server.getBooksDb();
         studentbookdb= (HashMap<String, List<Books>>) server.getStudentBookDb();
+    }
+    public void UpdateBook(String bookname,int number12) throws SQLException {
+       server.UpdateBook(bookname,number12);
     }
 }
