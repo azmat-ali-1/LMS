@@ -14,7 +14,7 @@ public class Server implements serverInterface {
     public  ResultSet resultSet;
     public Statement statement;
     public Server() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LMS","root","Al256282786#");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LMS","root","#");
         statement = connection.createStatement();
         try{
              statement.executeUpdate(
