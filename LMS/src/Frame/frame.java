@@ -1,4 +1,8 @@
-import Lms.Interfaces.framInterface;
+package Frame;
+
+import Interfaces.framInterface;
+import Models.Books;
+import Models.Student;
 
 
 import javax.swing.*;
@@ -16,7 +20,7 @@ import java.util.List;
 
 public class frame extends framehelper implements ActionListener, framInterface, MouseListener {
 
-    frame() throws SQLException {
+    public frame() throws SQLException {
         //new popWindow();
         f = new JFrame("Menu and MenuItem Example");
         JMenuBar mb = new JMenuBar();
@@ -105,7 +109,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
        // String str [][] = {{"Azmat","azmat","azmat"}};
         List<Books> f = repository.getAllBooks();
         //System.out.println(f.get(0).getName());
-        String str [][] = new String[f.size()][4];
+        String[][] str = new String[f.size()][4];
         for (int i=0;i<f.size();i++){
             Books h = f.get(i);
             String name = h.getName();
@@ -124,7 +128,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable.setShowGrid(true);
         jTable.setGridColor(Color.BLACK);
         jTable.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable.setAutoResizeMode(jTable.AUTO_RESIZE_OFF);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JScrollPane sp = new JScrollPane(jTable);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -168,7 +172,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable.setShowGrid(true);
         jTable.setGridColor(Color.BLACK);
         jTable.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable.setAutoResizeMode(jTable.AUTO_RESIZE_OFF);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JScrollPane sp = new JScrollPane(jTable);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -190,7 +194,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
     public void getBookByName() throws SQLException {
         List<Books> b = repository.getBookByName(nametextField.getText());
 
-        String str [][] = new String[b.size()][4];
+        String[][] str = new String[b.size()][4];
 
         for (int i=0;i<b.size();i++){
             Books h = b.get(i);
@@ -210,7 +214,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable.setShowGrid(true);
         jTable.setGridColor(Color.BLACK);
         jTable.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable.setAutoResizeMode(jTable.AUTO_RESIZE_OFF);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JScrollPane sp = new JScrollPane(jTable);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -253,7 +257,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable.setShowGrid(true);
         jTable.setGridColor(Color.BLACK);
         jTable.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable.setAutoResizeMode(jTable.AUTO_RESIZE_OFF);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JScrollPane sp = new JScrollPane(jTable);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -264,7 +268,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
     }
     public void getStudentByNameInterface(){
         studentnamefield = new JTextField(10);
-        studentnamelabel = new JLabel("Enter Student Name");
+        studentnamelabel = new JLabel("Enter Models.Student Name");
         studentnamelabel.setForeground(Color.WHITE);
         studentnamebutton = new JButton("Search");
         p2.add(studentnamebutton);
@@ -295,7 +299,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable.setShowGrid(true);
         jTable.setGridColor(Color.BLACK);
         jTable.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable.setAutoResizeMode(jTable.AUTO_RESIZE_OFF);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JScrollPane sp = new JScrollPane(jTable);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -327,7 +331,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
             int bookCount = h.getNumberOfBookIssue();
             str[i][0]=name;str[i][1]=Author;str[i][2]=serialNo;str[i][3]=String.valueOf(bookCount);
         }
-        String c[] = {"Name","Enrolement","Branch","count"};
+        String c[] = {"Name","Enrollment","Branch","count"};
         jTable = new JTable(str,c);
         jTable.setLayout(null);
         jTable.setVisible(true);
@@ -337,7 +341,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable.setShowGrid(true);
         jTable.setGridColor(Color.BLACK);
         jTable.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable.setAutoResizeMode(jTable.AUTO_RESIZE_OFF);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JScrollPane sp = new JScrollPane(jTable);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -361,7 +365,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
 
     }
     public void AddBook() throws SQLException {
-        if(addbookname.getText().equals("")||addbookauthor.getText().equals("")||addbooknumber.getText().equals("")||addbookcount.getText().equals("")||Character.isDigit(addbookcount.getText().charAt(0))==false||addbookcount.getText().equals("0")){
+        if(addbookname.getText().equals("")||addbookauthor.getText().equals("")||addbooknumber.getText().equals("")||addbookcount.getText().equals("")|| !Character.isDigit(addbookcount.getText().charAt(0)) ||addbookcount.getText().equals("0")){
             JOptionPane.showMessageDialog(f,"Invalid");
             return;
         }
@@ -370,7 +374,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
     }
 
     public void AddStudentInterface() {
-        addstudentnameL = new JLabel("Student name");addstudentname = new JTextField(10);
+        addstudentnameL = new JLabel("Models.Student name");addstudentname = new JTextField(10);
         addstudentenrolL = new JLabel("Enrolment");addstudentenrol = new JTextField(10);
         addstudentbranchL = new JLabel("Branch");addstudentbranch=new JTextField(10);
 
@@ -394,7 +398,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
     public void issuebooktostudentbynameInterface(){
         issuenamebook = new JLabel("Book name");
         issuenbookfield = new JTextField(10);
-        issuenamestudent = new JLabel("Student name");
+        issuenamestudent = new JLabel("Models.Student name");
         issuestudentfield = new JTextField(10);
         issuebookbutton = new JButton("Submit");
         issuebookbutton.addActionListener(this);
@@ -414,7 +418,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
     public void issuebooktostudentbyserialInterface(){
         issuenamebook = new JLabel("Book no");
         issuenbookfield = new JTextField(10);
-        issuenamestudent = new JLabel("Student name");
+        issuenamestudent = new JLabel("Models.Student name");
         issuestudentfield = new JTextField(10);
         issuebookbuttons = new JButton("Submit");
         issuebookbuttons.addActionListener(this);
@@ -431,7 +435,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
     public void getAllStudent() throws SQLException {
         List<Student> f = repository.getAllStudentDetail();
         //System.out.println(f.get(0).getName());
-        String str [][] = new String[f.size()][4];
+        String[][] str = new String[f.size()][4];
         for (int i=0;i<f.size();i++){
             Student h = f.get(i);
             String name = h.getName();
@@ -450,7 +454,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable.setShowGrid(true);
         jTable.setGridColor(Color.BLACK);
         jTable.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable.setAutoResizeMode(jTable.AUTO_RESIZE_OFF);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         JScrollPane sp = new JScrollPane(jTable);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -486,7 +490,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable1.setShowGrid(true);
         jTable1.setGridColor(Color.BLACK);
         jTable1.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         sp = new JScrollPane(jTable1);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -517,7 +521,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         jTable1.setShowGrid(true);
         jTable1.setGridColor(Color.BLACK);
         jTable1.setBorder(new EtchedBorder(EtchedBorder.RAISED));
-        jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         sp = new JScrollPane(jTable1);
         sp.setBackground(Color.BLACK);
         sp.setBorder(new EtchedBorder(EtchedBorder.RAISED));
@@ -529,7 +533,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         p2.repaint();
     }
     public void issuebooktostudentbyselectionInterface(){
-        JLabel jLabel = new JLabel("Enter Student Name ");
+        JLabel jLabel = new JLabel("Enter Models.Student Name ");
         jLabel.setForeground(Color.WHITE);
         jTextField = new JTextField(10);
         jButton = new JButton("Enter");
@@ -542,7 +546,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         this.sname = studentname;
         repository.update();
         if(!repository.studentdb.containsKey(sname)){
-            JOptionPane.showMessageDialog(null,"Student not present in list "+sname);
+            JOptionPane.showMessageDialog(null,"Models.Student not present in list "+sname);
             issuebooktostudentbyselectionInterface();
             return;
         }
@@ -582,7 +586,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
     }
     public void DeleteBook() throws SQLException {
         List<Books> books1 = repository.getAllBooks();
-        String str [] = new String[books1.size()];
+        String[] str = new String[books1.size()];
         for (int i=0;i<books1.size();i++){
             str[i]=books1.get(i).getName();
         }
@@ -600,7 +604,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         p2.add(jButton1);
     }
     public void retrunBookInterface() throws SQLException {
-        JLabel jLabel = new JLabel("Enter Student Name");
+        JLabel jLabel = new JLabel("Enter Models.Student Name");
         jLabel.setForeground(Color.WHITE);
         jTextField2 = new JTextField(10);
         jButton2 = new JButton("Search");
@@ -624,7 +628,7 @@ public class frame extends framehelper implements ActionListener, framInterface,
         repository.update();
         List<Books> books4 = repository.getStudentIssueBooks(name);
         if(books4==null){
-            JOptionPane.showMessageDialog(null,name+" This student not having any book"+"\n"+"or"+"\n"+"Invalid Student name");
+            JOptionPane.showMessageDialog(null,name+" This student not having any book"+"\n"+"or"+"\n"+"Invalid Models.Student name");
             retrunBookInterface();
             return;
         }

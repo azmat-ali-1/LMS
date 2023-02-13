@@ -1,4 +1,8 @@
+package Server;
 
+import Interfaces.serverInterface;
+import Models.Books;
+import Models.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,18 +13,37 @@ import java.util.Map;
 public class Server implements serverInterface {
     public  ResultSet resultSet;
     public Statement statement;
-    Server() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarymanagementsystem","root","Al256282786#");
+    public Server() throws SQLException {
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LMS","root","Al256282786#");
         statement = connection.createStatement();
-        resultSet = statement.executeQuery(
-                "select * from student"
-        );
-
-        while (resultSet.next()){
-            System.out.println(resultSet.getString("name")+" "+resultSet.getString("enrolmentid")+" "+resultSet.getString("branch")+" "+resultSet.getInt("numberofbooks"));
+        try{
+             statement.executeUpdate(
+                    "create table student(name varchar(255),enrolmentid varchar(255),branch varchar(255),numberofbooks int)"
+            );
         }
-    }
+        catch (Exception e){
 
+        }
+
+        try {
+            statement.executeUpdate(
+                    "create table book(name varchar(255),author varchar(255),serialno varchar(255),bookcount int)"
+            );
+        }
+        catch (Exception e){
+
+        }
+
+        try {
+            statement.executeUpdate(
+                    "create table studentbook(studentname varchar(255),name varchar(255),author varchar(255),serialno varchar(255),bookcount int)"
+            );
+        }
+        catch (Exception e){
+
+        }
+        System.out.println("dasfdasfdasfdsf");
+    }
 
     @Override
     public Map<String, Student> getStudentDb() throws SQLException {
@@ -158,8 +181,8 @@ public class Server implements serverInterface {
     }
     public static void main(String[] args) throws SQLException {
         Server s = new Server();
-//        Map<String,Books>map = new HashMap<>();
-//        map.put("azmat",new Books("azmat","azmat","dadqd878",5));
+//        Map<String,Models.Books>map = new HashMap<>();
+//        map.put("azmat",new Models.Books("azmat","azmat","dadqd878",5));
 //        s.setBookDb(map);
 //        s.updateBookCount("azmat",10);
 //        s.removeBook("azmat");

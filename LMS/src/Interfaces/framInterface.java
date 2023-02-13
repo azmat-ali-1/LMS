@@ -1,4 +1,4 @@
-package Lms.Interfaces;
+package Interfaces;
 
 import java.sql.SQLException;
 
@@ -9,21 +9,21 @@ public interface framInterface {
     public void getBookByName() throws SQLException;
     public void getBookBySerialNo() throws SQLException;
     public void AddBook() throws SQLException;
-    //Student function
+    //Models.Student function
     public void getAllStudent() throws SQLException;
     public void getStudentByName() throws SQLException;
     public void getStudentByEnroll() throws SQLException;
     public void AddStudent() throws SQLException;
 
 
-    //Book Java frame
+    //Book Java Frame.frame
     public void AddBookInteface();
     public void AddStudentInterface();
     public void getBookByAuthorInterface();
     public void getBookByNameInterface();
     public void getBookBySerialNoInterface();
 
-    //Student java frame
+    //Models.Student java Frame.frame
     public void getStudentByNameInterface();
     public void getStudentByEnrollInterface();
 

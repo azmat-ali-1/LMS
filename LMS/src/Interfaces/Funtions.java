@@ -1,4 +1,7 @@
+package Interfaces;
 
+import Models.Books;
+import Models.Student;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -12,7 +15,7 @@ public interface Funtions {
     public List<Books>getBookBySerialNo(String SerialNo) throws SQLException;
     public List<Books> IssueBooks(String StudentName);
 
-    //Student Function get function
+    //Models.Student Function get function
     public List<Student> SearchStudentByName(String name) throws SQLException;
     public  List<Student> SearchStudentByEnroll(String name)throws SQLException;
     public List<Student> ListOfNumberOfStudent();

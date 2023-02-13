@@ -1,4 +1,7 @@
+package Frame;
 
+import Models.Books;
+import Repositorys.Repository;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -54,7 +57,7 @@ public class framehelper {
         }
         for (int i=0;i<s.size();i++){
             String str = repository.issueBookToStudent(sname,s.get(i));
-            if(str.equals("Student not present in list "+sname)){
+            if(str.equals("Models.Student not present in list "+sname)){
                 JOptionPane.showMessageDialog(null,str);
                 return;
             }
@@ -63,7 +66,7 @@ public class framehelper {
         for(int i=0;i<s.size();i++){
             joption=joption+"\n"+s.get(i);
         }
-        joption="Hi...   "+sname+" Your Books given below"+"\n"+joption;
+        joption="Hi...   "+sname+" Your Models.Books given below"+"\n"+joption;
         JOptionPane.showMessageDialog(null,joption);
     }
 

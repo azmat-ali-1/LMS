@@ -1,6 +1,10 @@
+package Repositorys;
 
 
-
+import Interfaces.Funtions;
+import Models.Books;
+import Models.Student;
+import Server.Server;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -270,7 +274,7 @@ public class Repository implements Funtions {
             return "Book not present "+book;
 
         }
-        return "Student not present in list "+student;
+        return "Models.Student not present in list "+student;
     }
     public String issueBookToStudentserial(String student,String serialNo) throws SQLException {
         studentdb = (HashMap<String, Student>) server.getStudentDb();
@@ -289,7 +293,7 @@ public class Repository implements Funtions {
         } else if (bookp == false) {
             return "BookSerialNo. not present "+serialNo;
         }
-        return "Student not present in list "+student;
+        return "Models.Student not present in list "+student;
     }
     public void update() throws SQLException {
         studentdb= (HashMap<String, Student>) server.getStudentDb();

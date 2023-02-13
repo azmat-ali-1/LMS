@@ -1,3 +1,5 @@
+package Models;
+
 public class Student {
     private String name;
     private String EnrolmentId;
